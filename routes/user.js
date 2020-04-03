@@ -70,15 +70,7 @@ router.post(
                     if (err) throw err;
 
                     // Update refreash token in DB
-                    User.findOneAndUpdate({
-                        email
-                    }, {
-                        $set: {
-                            refresh_token : randtoken.uid(256)
-                        }
-                    }, {
-                        new: true
-                    })
+                    
                     
                     res.status(200).json({
                         token
