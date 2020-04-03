@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+require('dotenv').config({ debug: process.env.DEBUG });
 
 // Set here your mongo creds
 // mongodb://<username>:<password>@<db-host>:<port>/<database-name>
-const MONGOURI = 'mongodb://localhost:27017/node-template';
+const MONGOURI = process.env.DB_URI;
 
 const InitiateMongoServer = async () => {
     try {

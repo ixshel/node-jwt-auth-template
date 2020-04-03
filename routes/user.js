@@ -2,6 +2,7 @@ const express = require("express");
 const { check, validationResult } = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const randToken = require('rand-token');
 const router = express.Router();
 
 const User = require("../models/User");
@@ -32,11 +33,7 @@ router.post(
             });
         }
 
-        const {
-            username,
-            email,
-            password
-        } = req.body;
+        const { username, email, password } = req.body;
         try {
             let user = await User.findOne({
                 email
@@ -66,11 +63,23 @@ router.post(
 
             jwt.sign(
                 payload,
-                "randomString", {
-                expiresIn: 10000
+                "secret", {
+                expiresIn: 36000
             },
                 (err, token) => {
                     if (err) throw err;
+
+                    // Update refreash token in DB
+                    User.findOneAndUpdate({
+                        email
+                    }, {
+                        $set: {
+                            refresh_token : randtoken.uid(256)
+                        }
+                    }, {
+                        new: true
+                    })
+                    
                     res.status(200).json({
                         token
                     });
@@ -126,7 +135,7 @@ router.post(
                 payload,
                 "secret",
                 {
-                    expiresIn: 3600
+                    expiresIn: 36000
                 },
                 (err, token) => {
                     if (err) throw err;

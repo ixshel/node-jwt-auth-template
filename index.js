@@ -12,6 +12,8 @@ const app = express();
 // PORT
 const PORT = process.env.PORT || 4000;
 
+require('dotenv').config({ debug: process.env.DEBUG });
+
 // Middleware
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
