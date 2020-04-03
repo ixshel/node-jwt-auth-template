@@ -1,6 +1,7 @@
 /**
  * This will be the model to save our registered
  * users
+ * Roles: ['Admin', 'User']
  */
 
  const mongoose = require('mongoose');
@@ -17,6 +18,11 @@
      password: {
          type: String,
          required: true
+     },
+     role: {
+         type: String,
+         enum: ["admin", "user"],
+         default: "user"
      },
      createdAt: {
          type: Date,
