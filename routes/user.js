@@ -21,7 +21,7 @@ router.post(
             .isEmpty(),
         check("email", "Please enter a valid email").isEmail(),
         check("password", "Please enter a valid password").isLength({
-            min: 6
+            min: 6 // increase it to 8
         })
     ],
     async (req, res) => {
@@ -70,8 +70,8 @@ router.post(
                     if (err) throw err;
 
                     // Update refreash token in DB
-                    
-                    
+
+
                     res.status(200).json({
                         token
                     });
@@ -108,7 +108,7 @@ router.post(
             });
             if (!user)
                 return res.status(400).json({
-                    message: "User Not Exist"
+                    message: "User Does Not Exist"
                 });
 
             const isMatch = await bcrypt.compare(password, user.password);
@@ -132,7 +132,19 @@ router.post(
                 (err, token) => {
                     if (err) throw err;
                     res.status(200).json({
-                        token
+                        // token,
+                        // {}
+                        // 'user._id': user.id,
+                        // 'user.username': user.username,
+                        // 'user.email': user.email,
+                        // 'user.role': user.role 
+                        // user: {
+                            token,
+                            _id: user.id,
+                            username: user.username,
+                            email: user.email,
+                            role: user.role
+                        // }
                     });
                 }
             );

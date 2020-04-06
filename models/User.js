@@ -21,7 +21,7 @@
      },
      role: {
          type: String,
-         enum: ["admin", "user"],
+         enum: ["super-admin", "admin", "user"],
          default: "user"
      },
      createdAt: {
