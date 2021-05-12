@@ -24,7 +24,7 @@
     "express-validator": "^6.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
-    "nodemailer": "^6.4.6",
+    "nodemailer": "^6.4.16",
     "rand-token": "^1.0.1",
     "twilio": "^3.42.0",
     "authorizenet": "^1.0.7"
